@@ -77,7 +77,8 @@ function renameSeries(source_dir, curnum, logfile)
                 repmat(' ', 1, 4), 'SLICE', repmat(' ', 1, 2), 'TR(ms)', repmat(' ', 1, 5 - length('TR(ms')), 'TE(ms)');
             fprintf(logfile, '%s\n', repmat('-',1,130));
         end
-        namestr = [info.SeriesNumber, '_', info.SeriesDescription]; %get name of first DICOM file
+        series_desc = strrep(info.SeriesDescription, ' ', '_');
+        namestr = [info.SeriesNumber, '_', series_desc]; %get name of first DICOM file
         cd ..
         if exist(namestr)
             namestr = [namestr, '_', num2str(curnum)]; % sub-directory renamed
