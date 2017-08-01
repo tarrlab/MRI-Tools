@@ -87,8 +87,10 @@ function renameSeries(source_dir, curnum, logfile)
                                                        % if not first of
                                                        % series type
         end
+        old_name = pwd;
+        cd ..
         % rename current directory with series information
-        command = ['mv . ', namestr];
+        command = ['mv ', old_name, ' ', namestr];
         [status, cmdout] = system(command);
         cmdout
         if status ~= 0
@@ -132,7 +134,6 @@ function renameSeries(source_dir, curnum, logfile)
             repmat(' ', 1, 5 - length(num2str(info.SliceThickness))), info.RepetitionTime, ...
             spacestr, info.EchoTime);
     end
-    cd ..
     %rmdir(source_dir);
 end
    
