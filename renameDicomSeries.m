@@ -81,14 +81,20 @@ function renameSeries(source_dir, curnum, logfile)
         series_num = num2str(info.SeriesNumber);
         namestr = [series_num, '_', series_desc]; %get name of first DICOM file
         cd ..
-        if exist(namestr)
+        if exist(['../', namestr])
             namestr = [namestr, '_', num2str(curnum)]; % sub-directory renamed
                                                        % with number suffix
                                                        % if not first of
                                                        % series type
         end
-        mkdir(namestr) %make new directory
-        cd(namestr)
+        % rename current directory with series information
+        command = ['mv . ', namestr];
+        [status, cmdout] = system(command);
+        cmdout
+        if status ~= 0
+            error('Error: could not rename directory');
+        end
+        %{
         for i = 1:length(dicom_list)
             %get metadata from current dicom file
             dicom_file = fullfile('..', source_dir, dicom_list(i).name);
@@ -112,6 +118,7 @@ function renameSeries(source_dir, curnum, logfile)
                 end
             end
         end
+        %}
         %spacing things for readable logfile
         if length(num2str(info.RepetitionTime)) < 4
             spacestr = repmat(' ', 1, 5 - length(num2str(info.RepetitionTime)) + 2);
@@ -126,7 +133,7 @@ function renameSeries(source_dir, curnum, logfile)
             spacestr, info.EchoTime);
     end
     cd ..
-    rmdir(source_dir);
+    %rmdir(source_dir);
 end
    
         
