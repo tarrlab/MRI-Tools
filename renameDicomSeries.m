@@ -98,7 +98,13 @@ function renameSeries(source_dir, curnum, logfile)
             dicom_name = [name, ext];
             dicom_series = temp_info.SeriesDescription; %get name of scan series
             dicom_mod_date = temp_info.FileModDate; %get file's modification date
-            movefile(fullfile('..', source_dir, dicom_list(i).name)); %copy to new dir
+            fname = fullfile('..', source_dir, dicom_list(i).name); 
+            command = ['mv ', fname, ' .'];
+            [status, cmdout] = system(command);
+            cmdout
+            if status ~= 0
+                error('Error: could not move requested file.');
+            end
             file_count = file_count + 1;
             if i == length(dicom_list)
                 if temp_info.InstanceNumber ~= file_count
