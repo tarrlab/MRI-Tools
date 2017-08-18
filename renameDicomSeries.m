@@ -51,13 +51,13 @@ end
 % sub-directory parser
 function renameSeries(source_dir, curnum, logfile)
     
-    if ~ischar(source_dir) or ~exist(source_dir)
+    if ~ischar(source_dir) || ~exist(source_dir, 'dir')
         error('%s is not a valid directory.', source_dir)
     end
     
     cd(source_dir)
     
-    file_count = 0;
+    file_count = length(dir);
     
     dicom_list=dir(fullfile(sprintf('*.dcm'))); %get list of all DICOM files
     if length(dicom_list) == 0
@@ -80,7 +80,6 @@ function renameSeries(source_dir, curnum, logfile)
         series_desc = strrep(info.SeriesDescription, ' ', '_');
         series_num = num2str(info.SeriesNumber);
         namestr = [series_num, '_', series_desc]; %get name of first DICOM file
-        cd ..
         if exist(['../', namestr])
             namestr = [namestr, '_', num2str(curnum)]; % sub-directory renamed
                                                        % with number suffix
