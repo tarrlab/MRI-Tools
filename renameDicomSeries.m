@@ -19,7 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % wrapper function - takes outer directory
-function renameDicomSeries(base_dir)
+function renameDicomSeries
+
+    base_dir = uigetdir;
 
     if ~ischar(base_dir) or ~exist(base_dir)
         error('%s is not a valid directory.', base_dir)
