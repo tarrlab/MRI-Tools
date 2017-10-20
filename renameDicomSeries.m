@@ -34,7 +34,7 @@ function renameDicomSeries
     subdirs = contents(dirflags);
 
     for i = 1:length(subdirs)
-        if subdirs(i).name == 'physio'
+        if strcmp(subdirs(i).name, 'physio')
             subdirs(i) = [];
             break;
         end
@@ -107,7 +107,7 @@ function renameSeries(source_dir, curnum, logfile)
         % rename current directory with series information
         command = ['mv ', old_name, ' ', namestr];
         [status, cmdout] = system(command);
-        cmdout
+        cmdout;
         if status ~= 0
             error('Error: could not rename directory');
         end
