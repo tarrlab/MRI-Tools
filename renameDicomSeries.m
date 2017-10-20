@@ -42,9 +42,16 @@ function renameDicomSeries
     fprintf(logfile, '%s\n', '---------------------------Start of logfile-------------------------------');
     fprintf(logfile, '%s\n', '');
     
+    dirnames = [];
     for i = 1:length(subdirs)
+        dirnames = [dirnames; str2num(subdirs(i).name)];
+    end
+
+    dirnames = sort(dirnames);
+
+    for i = 1:length(dirnames)
         disp(['working on directory: ', subdirs(i).name]);
-        renameSeries(subdirs(i).name, i, logfile);
+        renameSeries(num2str(dirnames(i)), i, logfile);
     end
     fprintf(logfile, '%s\n', repmat('-',1,130));
     fclose(logfile);
