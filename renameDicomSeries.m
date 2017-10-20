@@ -32,6 +32,13 @@ function renameDicomSeries
     contents = dir;
     dirflags = [contents.isdir];
     subdirs = contents(dirflags);
+
+    for i = 1:length(subdirs)
+        if subdirs(i).name == 'physio'
+            subdirs(i) = [];
+            break;
+        end
+    end
     
     pathparts = strsplit(base_dir, '/');
     base_name = pathparts{end};
