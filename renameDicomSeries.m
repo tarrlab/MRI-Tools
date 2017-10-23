@@ -106,6 +106,9 @@ function renameSeries(source_dir, curnum, logfile)
         cd ..
         % rename current directory with series information
         command = ['mv ', old_name, ' ', namestr];
+        % suppress automatic shell output (maybe)
+        system('exec > /dev/null 2>&1');
+
         [status, cmdout] = system(command);
         cmdout;
         if status ~= 0
