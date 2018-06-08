@@ -17,6 +17,8 @@ Reads the 'SeriesDescription' field from the metadata of the first file in each 
     - `python setup.py install`
 - Takes NIfTI files as input, writes out NIfTI's with "_defaced" appended to filename
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#### mri_deface usage, for reference
 
 Copy of FreeSurfer's [mri\_deface](https://surfer.nmr.mgh.harvard.edu/fswiki/mri_deface) tool for scan anonymization.
 Usage:
