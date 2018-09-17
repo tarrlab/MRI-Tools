@@ -29,7 +29,7 @@ for i = 1:length(prtFiles)
        eventTable(r,2) = eventTable(r,2) - eventTable(r,1); 
     end
     % initialize tsv
-    outfile = [fname '.tsv'];
+    outfile = [fname '_events.tsv'];
     fout = fopen(outfile, 'w');
     fprintf(fout, 'onset\tduration\tcondition\n');
     % print event times to tsv
