@@ -1,0 +1,51 @@
+
+FileVersion:        2
+
+ResolutionOfTime:   Volumes
+
+Experiment:         Bio Motion Localizer
+
+BackgroundColor:    0 0 0
+TextColor:          255 255 255
+TimeCourseColor:    255 255 255
+TimeCourseThick:    3
+ReferenceFuncColor: 0 0 80
+ReferenceFuncThick: 2
+
+NrOfConditions:     3
+
+biological
+6
+      7           14
+     29           36
+     51           58
+     73           80
+     95          102
+    117          124
+Color:              255 0 0
+
+scrambled
+6
+     18           25
+     40           47
+     62           69
+     84           91
+    106          113
+    128          135
+Color:              0 255 0
+
+fixation
+12
+      1            6
+     15           17
+     26           28
+     37           39
+     48           50
+     59           61
+     70           72
+     81           83
+     92           94
+    103          105
+    114          116
+    125          127
+Color:              178 178 178
