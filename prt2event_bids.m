@@ -10,7 +10,16 @@ basedir = uigetdir;
 contents = dir(basedir);
 cd(basedir)
 prtFiles = dir('*.prt');
-TR = input('Please enter TR length (in seconds): ');
+fmt = 0;
+TR = 0;
+while fmt ~= 1 && fmt ~= 2
+    fmt = input('Please enter PRT format - 1 (vol) or 2 (msec): ');
+    if fmt == 1
+        TR = input('Please enter TR (in seconds): ');
+    else
+        fprintf('PRT format is msec\n');
+    end
+end
 
 % loop over PRT files, convert to TSV event files
 for i = 1:length(prtFiles)
@@ -20,7 +29,17 @@ for i = 1:length(prtFiles)
     eventTable = [];
     for c = 1:length(prt.Cond)
         for oo = 1:length(prt.Cond(c).OnOffsets)
-            eventTable = [eventTable; (prt.Cond(c).OnOffsets(oo,1)-1)*TR, prt.Cond(c).OnOffsets(oo,2)*TR, c];
+            if strcmp(prt.ResolutionOfTime, 'Volumes')
+                if fmt == 2
+                    fprintf('Incorrect format entered. Using Volume resolution.\n');
+                end
+                eventTable = [eventTable; (prt.Cond(c).OnOffsets(oo,1)-1)*TR, prt.Cond(c).OnOffsets(oo,2)*TR, c];
+            else
+                if fmt == 1
+                    fprintf('Incorrect format entered. Using msec resolution.\n');
+                end
+                eventTable = [eventTable; (prt.Cond(c).OnOffsets(oo,1)-1)/1000, prt.Cond(c).OnOffsets(oo,2)/1000, c];
+            end
         end
     end
     eventTable = sortrows(eventTable);
